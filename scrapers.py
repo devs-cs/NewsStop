@@ -2,15 +2,6 @@ from bs4 import BeautifulSoup
 import re
 import requests
 
-def extract_CNN(url):
-    response = requests.get(url)
-    html_content = response.text
-    filtered_content = extract_ld_json(html_content)
-    start = filtered_content.find("articleBody")
-    end = filtered_content.find("articleSection")
-    text = filtered_content[start + 14:end-3]
-    return text
-
 def extract_ld_json(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     script_pattern = re.compile(r'^<script[^>]+type=[\'"]application/ld\+json[\'"]>', re.IGNORECASE)
@@ -21,6 +12,17 @@ def extract_ld_json(html_content):
             break
     return content
 
+# CNN scraper function
+def extract_CNN(url):
+    response = requests.get(url)
+    html_content = response.text
+    filtered_content = extract_ld_json(html_content)
+    start = filtered_content.find("articleBody")
+    end = filtered_content.find("articleSection")
+    text = filtered_content[start + 14:end-3]
+    return text
+
+# Fox scraper function
 def extract_FOX(url):
     response = requests.get(url)
     html_content  = response.text
@@ -31,6 +33,7 @@ def extract_FOX(url):
     filtered_text = re.sub(pattern, lambda match: '' if len(match.group()) > 1 else match.group(), text)
     return filtered_text
 
+# NBC scraper function
 def extract_NBC(url):
     response = requests.get(url)
     html_content  = response.text
@@ -39,6 +42,7 @@ def extract_NBC(url):
     text = html_content[start +  15:end - 4]
     return text.replace("\n",  "")
 
+# BBC scraper function
 def extract_BBC(url):
     response = requests.get(url)
     content = response.text
@@ -55,6 +59,7 @@ def extract_BBC(url):
     term = ret.find(">")
     return(ret[term+1: ])
 
+# NPR scraper function
 def extract_NPR(url):
     response = requests.get(url)
     content = response.text

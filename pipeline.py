@@ -10,6 +10,7 @@ from firebase_admin import db
 
 from datetime import date
 
+# Get day for branching in Firebase
 day_one = date(2023, 6, 14)
 current_date = date.today()
 date_diff = current_date - day_one
@@ -66,11 +67,6 @@ for item in response_API['articles']:
             'author': item['author'],
             'text': text[start + 9:end-9],
             }
+
+    # Push data into Firebase database
     ref.push().set(json.dumps(data))
-
-
-
-
-
-
-#print(scrapers.extract_NPR(NPR_url))
