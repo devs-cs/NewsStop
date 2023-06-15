@@ -11,7 +11,7 @@ def extract_CNN(url):
     text = filtered_content[start + 14:end-3]
     print(text)
 
-def extract_ld_json(html_content, regex):
+def extract_ld_json(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     script_pattern = re.compile(r'^<script[^>]+type=[\'"]application/ld\+json[\'"]>', re.IGNORECASE)
     content = ''
