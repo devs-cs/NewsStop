@@ -9,7 +9,7 @@ def extract_CNN(url):
     start = filtered_content.find("articleBody")
     end = filtered_content.find("articleSection")
     text = filtered_content[start + 14:end-3]
-    print(text)
+    return text
 
 def extract_ld_json(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
