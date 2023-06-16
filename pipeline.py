@@ -18,7 +18,7 @@ diff_in_days = date_diff.days
 dbLink = f"day{diff_in_days}"
 
 # Link to Firebase 
-cred_obj = credentials.Certificate('news-ec2b9-firebase-adminsdk-k9etc-82205d140b.json')
+cred_obj = credentials.Certificate('news-ec2b9-firebase-adminsdk-k9etc-78b30fb4a7.json')
 default_app = firebase_admin.initialize_app(cred_obj, {
 	'databaseURL':"https://news-ec2b9-default-rtdb.firebaseio.com/"
 })
