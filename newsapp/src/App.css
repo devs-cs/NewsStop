@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.panel-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as per your requirement */
+  grid-gap: 10px;
+}
+
+.panel {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
