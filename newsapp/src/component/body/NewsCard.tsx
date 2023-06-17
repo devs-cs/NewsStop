@@ -34,9 +34,8 @@ const NewsCard: React.FC<CardProps> = ({ title, summary, source, loading, url}) 
       boxShadow: isHovered ? '0px 0px 50px rgba(134, 64, 249, 0.5)' : '0px 0px 50px rgba(134, 64, 249, 0.1)',
       transition: 'box-shadow .6s', 
     }}
-    onMouseEnter={handleMouseEnter}
-    onMouseLeave={handleMouseLeave}
-      >
+    onMouseEnter={() => setIsHovered(false)}
+    onMouseLeave={() => setIsHovered(false)}>
       <Title level={2} style={{ fontFamily: 'Playfair Display, serif', fontSize: '24px', color: "#0A1158"}}>
         {title}
       </Title>
