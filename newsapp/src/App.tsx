@@ -8,9 +8,14 @@ import "firebase/database"
 import { getDatabase, ref, onValue } from 'firebase/database';
 
 export default function App() {
-
     const [data, setData] = useState<CardProps[]>([]);
-    const mapping = {"cnn": "CNN", "fox-news": "Fox News", "nbc-news": "NBC News", "bbc-news": "BBC News", "npr": "NPR"} as { [key: string]: string };
+    const mapping = {
+      "cnn": "CNN", 
+      "fox-news": "Fox News", 
+      "nbc-news": "NBC News", 
+      "bbc-news": "BBC News", 
+      "npr": "NPR"
+    } as { [key: string]: string };
 
     useEffect(() => {
       // Firebase's Configuration 
