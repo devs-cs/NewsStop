@@ -1,19 +1,20 @@
 import './App.css';
 import { Row, Col } from 'antd';
 import React, { useEffect, useState } from 'react';
-import NewsCard  from './component/NewsCard';
-import {CardProps}  from './component/NewsCard';
+import NewsCard  from './component/body/NewsCard';
+import {CardProps}  from './component/body/NewsCard';
 import {initializeApp} from "firebase/app"
 import "firebase/database"
 import { getDatabase, ref, onValue } from 'firebase/database';
+import Header from './component/header/Header'
 
 export default function App() {
     const [data, setData] = useState<CardProps[]>([]);
     const mapping = {
       "cnn": "CNN", 
-      "fox-news": "Fox News", 
-      "nbc-news": "NBC News", 
-      "bbc-news": "BBC News", 
+      "fox-news": "Fox", 
+      "nbc-news": "NBC", 
+      "bbc-news": "BBC", 
       "npr": "NPR"
     } as { [key: string]: string };
 
@@ -47,29 +48,69 @@ export default function App() {
                     source: mapping[retObj["source"]], 
                     title: retObj["title"], 
                     author: retObj["author"], 
-                    url: retObj["url"], 
+                    url: retObj["url:"],  
                     summary: retObj["text"]};
-                  dataN.push(Obj);
+                dataN.push(Obj);
+                console.log(retObj)
               }
           }
           setData(dataN)
         });  
   },[])
   
+  var origin: any = []
+  for(let i = 0; i < 20; i++)
+    origin.push(i)
   return (
-      <div>
-        <h1> News </h1>
+    <div >
+        <Header />
         <Row gutter={[16, 16]}>
-          {data.map((news, index) => (
+          {data.length !== 0 ? (data.map((news, index) => (
             <Col key={index} span={6}>
               <NewsCard 
+              loading = {false}
+              title={news.title}
+              summary={news.summary}
+              source={news.source}  
+              url = {news.url}/>
+            </Col>
+          ))) : 
+          (origin.map((i: string) => (
+            <Col key={i} span={6}>
+              <NewsCard 
+              loading = {false}
+              title = {"title"}
+              summary = {"summary"}
+              source = {"source"}  
+              url = {"https:cnn.com"}/>
+            </Col>
+          )))}
+        </Row>
+    </div>
+    );
+
+}
+
+/*
+        <h1> News </h1>
+        <Row gutter={[16, 16]}>
+          {data.length !== 0 ? (data.map((news, index) => (
+            <Col key={index} span={6}>
+              <NewsCard 
+              loading = {false}
               title={news.title}
               summary={news.summary}
               source={news.source}  />
             </Col>
-          ))}
+          ))) : 
+          (origin.map((i: string) => (
+            <Col key={i} span={6}>
+              <NewsCard 
+              loading = {false}
+              title = {"title"}
+              summary = {"summary"}
+              source = {"source"}  />
+            </Col>
+          )))}
         </Row>
-      </div>
-    );
-
-}
+    */
