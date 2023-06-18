@@ -1,5 +1,6 @@
 import React from 'react';
 import {CoffeeOutlined} from '@ant-design/icons';
+import TextWithLine from '../body/TextWithLine';
 
 const Header: React.FC = () => {
   const currentDate = new Date();
@@ -22,14 +23,15 @@ const Header: React.FC = () => {
           padding: '10px',
           borderBottom: '1px solid #6B95FF'
         }} >
-      <p style={{ fontStyle: 'italic', fontSize: '32px', fontWeight: 'bold', marginBottom: '10px'}}>{dayOfWeek}</p>
-      <h1 style={{ marginTop: '0px', paddingBottom: '10px'}}>{formattedDate}</h1>
+      
+      <p style={{ fontStyle: 'italic', fontSize: '32px', fontWeight: 'bold', marginBottom: '10px'}}>⁎⁺✧˳ {dayOfWeek}  ✧⁎⁺˳</p>
+      <h1 style={{ marginTop: '0px', paddingBottom: '10px'}}> {formattedDate} </h1>
 
       </div>
       <div
         style={{
           position: 'relative',
-          top: '-21.5px', // Adjust this value as needed
+          top: '-21px', // Adjust this value as needed
           left: '50%',
           transform: 'translateX(-50%) rotate(45deg)',
           width: '40px',
@@ -38,7 +40,7 @@ const Header: React.FC = () => {
           border: '1px solid #6B95FF',
         }}
       >
-      <CoffeeOutlined style={{ fontSize: '20px', position: 'relative', top: '10px', left: '10px', transform: 'rotate(-45deg)'}}/>
+      <CoffeeOutlined style={{ fontSize: '20px', position: 'relative', top: '2px', left: '8px', transform: 'rotate(-45deg)'}}/>
       </div>
       
     </div>

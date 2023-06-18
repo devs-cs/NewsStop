@@ -33,13 +33,13 @@ params = {
     "sources": sources,
     "apiKey": AK
 }
-# response_API = requests.get(url, params=params).json()
-# with open("top.json", "w") as f:
-#      f.write(json.dumps(response_API))
+response_API = requests.get(url, params=params).json()
+with open("top.json", "w") as f:
+     f.write(json.dumps(response_API))
 
 # Access the data from json file from API request 
-with open("top.json") as f:
-    response_API = json.load(f)
+# with open("top.json") as f:
+#     response_API = json.load(f)
 
 # Use scrapper to get the text from the article
 text_data = []
@@ -62,10 +62,11 @@ for item in response_API['articles']:
     start = text.find("<summary>")
     end =  text.find("<\\summary>")
     data = {'source': item["source"]["id"], 
-            'url:': item["url"],
+            'url': item["url"],
             'title':  item['title'],
             'author': item['author'],
             'text': text[start + 9:end-9],
+            'imageUrl': item['urlToImage'],
             }
 
     # Push data into Firebase database
