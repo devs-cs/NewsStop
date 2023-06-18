@@ -8,7 +8,6 @@ def num_tokens_from_string(string: str, encoding_name: str) -> int:
     num_tokens = len(encoding.encode(string))
     return num_tokens
 
-
 def compare_encodings(example_string: str) -> None:
     """Prints a comparison of three string encodings."""
     # print the example string
