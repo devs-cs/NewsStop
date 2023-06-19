@@ -1,17 +1,15 @@
+// Relevant imports 
 import './App.css';
-import { Row, Col } from 'antd';
-import React, { useEffect, useState } from 'react';
-import NewsCard  from './component/body/NewsCard';
-import {CardProps}  from './component/body/NewsCard';
-import {initializeApp} from "firebase/app"
-import "firebase/database"
-import { getDatabase, ref, onValue } from 'firebase/database';
 import Header from './component/header/Header'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { WindowsFilled } from '@ant-design/icons';
+import NewsCard, { CardProps } from './component/body/NewsCard';
+import React, { useEffect, useState } from 'react';
+import { initializeApp } from "firebase/app"
+import { getDatabase, ref, onValue } from 'firebase/database';
 
 export default function App() {
+    // State for card's data 
     const [data, setData] = useState<CardProps[]>([]);
+    // Map news source to abbreviated names 
     const mapping = {
       "cnn": "CNN", 
       "fox-news": "FOX", 
@@ -42,9 +40,8 @@ export default function App() {
       predefinedDate.setHours(0, 0, 0, 0);
       currentDate.setHours(0, 0, 0, 0);
       const timeDiff = Math.abs(currentDate.getTime() - predefinedDate.getTime());
-      const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+      const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // ms * s * min * hr 
       const dbLink = `day${daysDiff}`;
-
       const articles = ref(db,dbLink)
 
       // Store data from database
@@ -69,22 +66,24 @@ export default function App() {
         });  
   },[])
   
+  // Create a list to store cards content 
   var origin: any = []
   for(let i = 0; i < 20; i++)
     origin.push(i)
 
-var columns: number = 4;
-if (window.innerWidth < 700)
+  // Set the number of columns based on the screen size
+  var columns: number = 4;
+  if (window.innerWidth < 700)
     columns = 2;
-else if(window.innerWidth < 1400)
-  columns = 3;
-console.log(window.innerWidth)
+  else if(window.innerWidth < 1400)
+    columns = 3;
+
   return (
-    <div >
+    <div>
         <Header /> 
         <div style = {{ columnCount: columns, columnGap: "10px"}}>
-          {data.length !== 0 ? (data.map((news, index) => (
-        
+          {data.length !== 0 ? (data.map((news) => (
+              // If there is data available
               <NewsCard 
               loading = {false}
               title={news.title}
@@ -93,7 +92,8 @@ console.log(window.innerWidth)
               url = {news.url}
               imageUrl = {news.imageUrl}/>
           ))) : 
-          (origin.map((i: string) => (
+          // If data is empty
+          (origin.map(() => (
               <NewsCard 
               loading = {false}
               title = {""}
@@ -102,34 +102,8 @@ console.log(window.innerWidth)
               url = {""}
               imageUrl = {""}
               />
-            
           )))}
         </div>
     </div>
-    );
-
+  );
 }
-
-/*
-        <h1> News </h1>
-        <Row gutter={[16, 16]}>
-          {data.length !== 0 ? (data.map((news, index) => (
-            <Col key={index} span={6}>
-              <NewsCard 
-              loading = {false}
-              title={news.title}
-              summary={news.summary}
-              source={news.source}  />
-            </Col>
-          ))) : 
-          (origin.map((i: string) => (
-            <Col key={i} span={6}>
-              <NewsCard 
-              loading = {false}
-              title = {"title"}
-              summary = {"summary"}
-              source = {"source"}  />
-            </Col>
-          )))}
-        </Row>
-    */
