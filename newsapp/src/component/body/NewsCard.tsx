@@ -19,37 +19,13 @@ export interface CardProps {
 // Define the Card component
 const NewsCard: React.FC<CardProps> = ({ title, summary, source, loading, url, imageUrl}) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const isVisibleOnMobile =
-        window.innerWidth < 700 && isElementInViewport();
-      setIsVisible(isVisibleOnMobile);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const isElementInViewport = () => {
-    const element = document.querySelector('.card');
-    if (element) {
-      const rect = element.getBoundingClientRect();
-      return rect.top >= 0 && rect.bottom <= window.innerHeight;
-    }
-    return false;
-  };
-
-  const boxShadowStyle = isVisible && window.innerWidth < 700 ? '0px 0px 50px rgba(134, 64, 249, 0.8)' : '0px 0px 50px rgba(134, 64, 249, 0.1)';
 
   console.log(imageUrl);
   return (
     
   <div className="card" onClick={() => window.open(url)}
     style={{
-      boxShadow: isHovered ? boxShadowStyle : '0px 0px 50px rgba(134, 64, 249, 0.1)',
+      boxShadow: isHovered ? '0px 0px 50px rgba(134, 64, 249, 0.8)' : '0px 0px 50px rgba(134, 64, 249, 0.1)',
       transition: 'box-shadow .3s',marginBottom: "10px", breakInside: "avoid-column"
     }}
     onMouseEnter={() => setIsHovered(true)}
@@ -63,7 +39,7 @@ const NewsCard: React.FC<CardProps> = ({ title, summary, source, loading, url, i
       <hr></hr>
       <p className="card-text" style = {{fontFamily: 'Playfair Display, serif', color: "#0A1158", textAlign: "center", marginTop: '10px', fontSize: window.innerWidth < 700 ? '11px' : '15px'}}> {summary}</p>
     </div>
-</div>
+  </div>
   );
 };
 
