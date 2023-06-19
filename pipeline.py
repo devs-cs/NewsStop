@@ -56,7 +56,10 @@ for item in response_API['articles']:
         news = scrapers.extract_BBC(item["url"])
     
     # Get the summary from GPT API
-    text  = get_sum(news)
+    if(len(news) == 0 or item["content"] is None):
+        text = "<summary> Click the box to see this video article <\\summary>"
+    else:
+        text  = get_sum(news)
 
     # Filter the text to get the summary
     start = text.find("<summary>")
