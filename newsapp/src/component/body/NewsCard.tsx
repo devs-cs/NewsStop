@@ -19,10 +19,8 @@ export interface CardProps {
 // Define the Card component
 const NewsCard: React.FC<CardProps> = ({ title, summary, source, loading, url, imageUrl}) => {
   const [isHovered, setIsHovered] = useState(false);
-
-  console.log(imageUrl);
-  return (
-    
+  
+  return (  
   <div className="card" onClick={() => window.open(url)}
     style={{
       boxShadow: isHovered ? '0px 0px 50px rgba(134, 64, 249, 0.8)' : '0px 0px 50px rgba(134, 64, 249, 0.1)',
@@ -44,27 +42,3 @@ const NewsCard: React.FC<CardProps> = ({ title, summary, source, loading, url, i
 };
 
 export default NewsCard;
-
-
-/*
-return (
-    
-    <Card
-    loading={loading}
-    hoverable={true}
-    onClick={() => window.open(url)}
-    style={{
-      boxShadow: isHovered ? '0px 0px 50px rgba(134, 64, 249, 0.5)' : '0px 0px 50px rgba(134, 64, 249, 0.1)',
-      transition: 'box-shadow .6s', 
-    }}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}>
-      <Title level={2} style={{ fontFamily: 'Playfair Display, serif', fontSize: '24px', color: "#0A1158"}}>
-        {title}
-      </Title>
-      <TextWithLine text = {source}/>
-      <p style = {{fontFamily: 'Playfair Display, serif', color: "#0A1158"}}> {summary}</p>
-      {/* <p>Source: {source}</p> *}
-      </Card>
-      );
-*/
