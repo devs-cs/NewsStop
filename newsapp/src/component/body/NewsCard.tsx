@@ -49,7 +49,7 @@ const NewsCard: React.FC<CardProps> = ({ title, summary, source, loading, url, i
     
   <div className="card" onClick={() => window.open(url)}
     style={{
-      boxShadow: isHovered ? '0px 0px 50px rgba(134, 64, 249, 0.8)' : '0px 0px 50px rgba(134, 64, 249, 0.1)',
+      boxShadow: isHovered ? boxShadowStyle : '0px 0px 50px rgba(134, 64, 249, 0.1)',
       transition: 'box-shadow .3s',marginBottom: "10px", breakInside: "avoid-column"
     }}
     onMouseEnter={() => setIsHovered(true)}
