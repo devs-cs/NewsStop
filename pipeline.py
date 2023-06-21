@@ -57,7 +57,7 @@ for item in response_API['articles']:
     
     # Get the summary from GPT API
     if(len(news) == 0 or item["content"] is None):
-        text = "<summary> Click the box to see this video article <\\summary>"
+        text = "<summary> Click the box to see this interactive article <\\summary>"
     else:
         text  = get_sum(news)
 
@@ -74,3 +74,4 @@ for item in response_API['articles']:
 
     # Push data into Firebase database
     ref.push().set(json.dumps(data))
+    print("Pass completed for article: ", item["url"])
