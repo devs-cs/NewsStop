@@ -9,7 +9,7 @@ def get_sum(text):
 
     # Setup
     model = "text-davinci-003"
-    prompt = f"Write a brief summary about the following article enclosed in xml tags. Make sure to enclose the summary in <summary> and </summary> tags. <article> {text} <\\article>"
+    prompt = f"Write a brief summary about the following article enclosed in xml tags. Make sure to enclose the summary in <summary> and </summary> tags. <article> {text[:3796]} <\\article>"
     temp = 0.8
     max_tokens = 300
     
